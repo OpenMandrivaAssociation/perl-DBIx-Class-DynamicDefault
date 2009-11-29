@@ -11,10 +11,12 @@ Group:      Development/Perl
 Url:        http://search.cpan.org/dist/%{upstream_name}
 Source0:    http://www.cpan.org/modules/by-module/DBIx/%{upstream_name}-%{upstream_version}.tar.gz
 
+BuildRequires: perl(DBD::SQLite)
 BuildRequires: perl(DBICx::TestDatabase)
 BuildRequires: perl(DBIx::Class)
 BuildRequires: perl(ExtUtils::MakeMaker)
 BuildRequires: perl(parent)
+
 BuildArch: noarch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
 
@@ -26,11 +28,10 @@ Automatically set and update fields with values calculated at runtime.
 
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor
-
-%{make}
+%make
 
 %check
-%{make} test
+%make test
 
 %install
 rm -rf %buildroot
@@ -44,5 +45,3 @@ rm -rf %buildroot
 %doc Changes README
 %{_mandir}/man3/*
 %perl_vendorlib/*
-
-
